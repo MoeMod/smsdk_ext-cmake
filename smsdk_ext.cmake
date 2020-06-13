@@ -108,7 +108,7 @@ add_library(tier0 INTERFACE)
 target_include_directories(tier0 INTERFACE
         ${HL2SDK_PATH}/public
         ${HL2SDK_PATH}/public/tier0
-        ${CMAKE_SOURCE_DIR}/wrappers/msvc
+        ${CMAKE_CURRENT_LIST_DIR}/wrappers/msvc
         )
 target_link_libraries(tier0 INTERFACE tier0${HL2SDK_LIB_STATIC_SUFFIX}${HL2SDK_LIB_STATIC_EXT})
 
@@ -245,7 +245,7 @@ if(SMEXT_ENGINE EQUAL 12)
 	    ${HL2SDK_PATH}/common/protobuf-2.5.0/src
 	    )
     target_include_directories(hl2sdk_protobuf PRIVATE 
-	    ${CMAKE_SOURCE_DIR}/wrappers/protobuf
+	    ${CMAKE_CURRENT_LIST_DIR}/wrappers/protobuf
 	    )
 
     add_library(hl2sdk_protobuf_csgo STATIC ${PROTO_SRCS} ${PROTO_HDRS})
