@@ -2,7 +2,7 @@
 set(HL2SDK_PATH "${CMAKE_SOURCE_DIR}/hl2sdk-csgo" CACHE PATH "Path to hl2sdk-csgo")
 set(SOURCEMOD_PATH "${CMAKE_SOURCE_DIR}/sourcemod" CACHE PATH "Path to sourcemod")
 set(METAMOD_SOURCE_PATH "${CMAKE_SOURCE_DIR}/metamod-source" CACHE PATH "Path to sourcemm")
-set(SMEXT_ENGINE_NAME "" CACHE STRING "Target engine name (CSGO|...)")
+set(SMEXT_ENGINE_NAME "CSGO" CACHE STRING "Target engine name (CSGO|...)")
 
 if(SMEXT_ENGINE_NAME MATCHES "CSGO")
     set(SMEXT_ENGINE 12 FORCE)
@@ -308,10 +308,17 @@ add_library(asm STATIC
 target_link_libraries(asm PRIVATE libudis86)
 target_include_directories(asm PUBLIC ${SOURCEMOD_PATH}/public)
 
+include(CheckIncludeFile)
+check_include_file(stdint.h HAVE_STDINT_H)
+
+
 add_library(CDetour INTERFACE)
 target_sources(CDetour INTERFACE 
     ${SOURCEMOD_PATH}/public/CDetour/detourhelpers.h
     ${SOURCEMOD_PATH}/public/CDetour/detours.cpp
     ${SOURCEMOD_PATH}/public/CDetour/detours.h
     )
+if(HAVE_STDINT_H)
+    target_compile_definitions(smsdk_ext INTERFACE -DHAVE_STDINT_H=1)
+endif()
 target_link_libraries(CDetour INTERFACE asm)
