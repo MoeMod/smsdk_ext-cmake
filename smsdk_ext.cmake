@@ -102,6 +102,8 @@ if(MSVC)
     add_compile_definitions(_CRT_SECURE_NO_WARNINGS=1)
 elseif(${CMAKE_CXX_COMPILER_ID} MATCHES "Clang")
     add_compile_options(-Wno-register -Wno-implicit-const-int-float-conversion -Wno-deprecated-volatile)
+elseif(${CMAKE_CXX_COMPILER_ID} MATCHES "GNU")
+    add_compile_options(-Wno-register -Wno-narrowing -Wno-volatile)
 endif()
 
 add_library(tier0 INTERFACE)
