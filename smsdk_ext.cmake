@@ -12,7 +12,7 @@ endif()
 
 set(CMAKE_CXX_STANDARD 17)
 if(MSVC)
-	add_compile_options(/wd4819 /wd4828 /wd5033 /permissive- /utf-8)
+	add_compile_options(/wd4091 /wd4819 /wd4828 /wd5033 /permissive- /utf-8)
 	add_compile_definitions(_CRT_SECURE_NO_WARNINGS=1)
 elseif(${CMAKE_CXX_COMPILER_ID} MATCHES "Clang")
 	add_compile_options(-Wno-register)
